@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Build Environment
       run: |
@@ -20,10 +20,10 @@ jobs:
 
     - name: Compile PS4 Executable
       run: |
-        make
+        g++ -O2 -Wall main.cpp -o PS4_AI_Companion.elf
 
     - name: Upload Built PKG Package
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: PS4-AI-Companion-PKG
         path: PS4_AI_Companion.elf
