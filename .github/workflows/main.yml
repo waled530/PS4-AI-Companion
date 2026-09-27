@@ -1,0 +1,29 @@
+name: Build PS4 PKG Automatically
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Build Environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential gcc g++
+
+    - name: Compile PS4 Executable
+      run: |
+        make
+
+    - name: Upload Built PKG Package
+      uses: actions/upload-artifact@v3
+      with:
+        name: PS4-AI-Companion-PKG
+        path: PS4_AI_Companion.elf
